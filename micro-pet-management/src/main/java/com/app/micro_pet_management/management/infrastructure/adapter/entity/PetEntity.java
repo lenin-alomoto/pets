@@ -1,6 +1,6 @@
 package com.app.micro_pet_management.management.infrastructure.adapter.entity;
 
-import com.app.micro_pet_management.management.domain.model.Measurement;
+import java.math.BigDecimal;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
@@ -31,8 +31,7 @@ public class PetEntity {
 	
 	private String city;
 	
-	@Column(name = "breed_group")
-	private String breedGroup;
+	private String breed;
 	
 	@Column(name = "life_span")
 	private String lifeSpan;
@@ -42,14 +41,29 @@ public class PetEntity {
 	    @AttributeOverride(name = "imperial", column = @Column(name = "weight_imperial")),
 	    @AttributeOverride(name = "metric", column = @Column(name = "weight_metric"))
 	})
-	private Measurement weight;
+	private MeasurementEntity weight;
+	
+	@Column(name = "min_weight")
+	private BigDecimal minWeight;
+
+	@Column(name = "max_weight")
+	private BigDecimal maxWeight;
 
 	@Embedded
 	@AttributeOverrides({
 	    @AttributeOverride(name = "imperial", column = @Column(name = "height_imperial")),
 	    @AttributeOverride(name = "metric", column = @Column(name = "height_metric"))
 	})
-	private Measurement height;
+	private MeasurementEntity height;
+	
+	@Column(name = "min_height")
+	private BigDecimal minHeight;
+
+	@Column(name = "max_height")
+	private BigDecimal maxHeight;
+	
+	@Column(name = "breed_group")
+	private String breedGroup;
 	
 	private String temperament;
 	
