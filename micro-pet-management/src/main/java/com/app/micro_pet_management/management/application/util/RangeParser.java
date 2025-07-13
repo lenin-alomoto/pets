@@ -26,10 +26,4 @@ public class RangeParser {
         }
     }
 
-    public static BigDecimal parseAverage(String range) {
-        BigDecimal min = parseMin(range);
-        BigDecimal max = parseMax(range);
-        if (min == null || max == null) return null;
-        return min.add(max).divide(BigDecimal.valueOf(2));
-    }
 }

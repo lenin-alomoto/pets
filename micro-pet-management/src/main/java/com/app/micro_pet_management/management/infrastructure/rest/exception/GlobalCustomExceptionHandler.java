@@ -14,23 +14,25 @@ public class GlobalCustomExceptionHandler {
 	
 	@ExceptionHandler(BreedNotFoundException.class)
     public ResponseEntity<ErrorDto> handleBreedNotFound(BreedNotFoundException ex) {
+		HttpStatus status = HttpStatus.NOT_FOUND;
 		ErrorDto error = new ErrorDto(
 				LocalDate.now(),
-				HttpStatus.NOT_FOUND.value(),
+				status.value(),
 				"No Resource Found", 
 				ex.getMessage()
 		);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        return ResponseEntity.status(status).body(error);
     }
 	
 	@ExceptionHandler(ExternalApiException .class)
     public ResponseEntity<ErrorDto> handleExternalApiError(ExternalApiException  ex) {
+		HttpStatus status = HttpStatus.BAD_GATEWAY;
 		ErrorDto error = new ErrorDto(
 				LocalDate.now(),
-				HttpStatus.BAD_GATEWAY.value(),
+				status.value(),
 				"Bad external API gateway", 
 				ex.getMessage()
 		);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        return ResponseEntity.status(status).body(error);
     }
 }

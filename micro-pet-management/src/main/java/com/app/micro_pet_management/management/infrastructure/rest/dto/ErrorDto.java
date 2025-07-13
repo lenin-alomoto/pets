@@ -6,7 +6,7 @@ public  record ErrorDto(
 		LocalDate date,
 		int status,
 		String error,
-		String messagge
+		String message 
 	) {
 
 }

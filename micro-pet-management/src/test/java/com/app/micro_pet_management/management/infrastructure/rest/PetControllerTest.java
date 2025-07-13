@@ -3,6 +3,7 @@ package com.app.micro_pet_management.management.infrastructure.rest;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -33,6 +35,7 @@ class PetControllerTest {
 	@MockitoBean
 	private PetRestMapper petRestMapper;
 
+	@WithMockUser(roles = "USER")
 	@Test
 	void testCreatePet() throws Exception {
         Pet domain = new Pet();
@@ -43,6 +46,7 @@ class PetControllerTest {
         when(petRestMapper.toResponse(domain)).thenReturn(response);
 
         mockMvc.perform(post("/v1/app/mange-pet")
+        		.with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                     {
@@ -56,6 +60,7 @@ class PetControllerTest {
             .andExpect(status().isOk());
 	}
 
+	@WithMockUser(roles = "USER")
 	@Test
 	void testFilters() throws Exception {
 		when(managePetUseCase.findAllByFilters(any())).thenReturn(List.of(new Pet()));
