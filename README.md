@@ -39,17 +39,11 @@ Esta aplicación permite:
   - Estructura ejemplo:
 
     {
-
         "name": "Pecosa5",
-
         "age": 7,
-
         "adrres": "Madrigal",
-
         "city": "Quito",
-
         "breed": "Terrier"
-
     }
 - Se recibe un `PetRequest` y se completa la información con datos de la API externa según la raza.
 
@@ -117,8 +111,8 @@ services:
 
 - **Dominio:**
   - modelos: `Pet`, `Measurement`, `PetFilter`
-  - repository: ManagePetRepositoryPort, PetApiRepositoryPort
-  - usecase: ManagePetUseCase, PetApiUseCase
+  - repository: `ManagePetRepositoryPort`, `PetApiRepositoryPort`
+  - usecase: `ManagePetUseCase`, `PetApiUseCase`
 - **Aplicación:** `ManagePetUseCaseImpl`, `PetApiUseCaseImpl`
 - **Infraestructura:**
   - Adaptadores: `PetApiRepositoryAdapter`, `ManagerPetRepositoryAdapter`
@@ -149,12 +143,13 @@ cd pets
 3. Si existe el .env siga al siguiente punto caso contrario créelo con lo siguiente:
 
    SECURITY\_USER=admin
-
    SECURITY\_PASSWORD=admin123
 
 4. Ejecuta:
 
+```bash
 docker-compose --env-file .env up --build
+```
 
 5. Accede a:
 
